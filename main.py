@@ -52,7 +52,7 @@ async def play(ctx, *name):
         # await ctx.send(name[0])
 
         if len(name) == 0:
-            playlist = ['ludas', 'jirka']
+            playlist = ['ludas', 'jirka', 'jolanda']
             choice = random.choice(playlist)
             # await ctx.send('{}'.format(choice))
             await play(ctx, choice)
@@ -66,6 +66,11 @@ async def play(ctx, *name):
             async with ctx.typing():
                 voice_channel.play(discord.FFmpegPCMAudio(source='./jirka/' + str(id) + '.mp3'))
                 await ctx.send('Jirka ID: {}'.format(id))
+        elif name[0] == 'jolanda':
+            id = randint(1, 13)
+            async with ctx.typing():
+                voice_channel.play(discord.FFmpegPCMAudio(source='./jolanda/' + str(id) + '.wav'))
+                await ctx.send('Jolanda ID: {}'.format(id))
         else:
             await ctx.send("Who the fuck is {}".format(name[0]))
     except:
@@ -111,6 +116,14 @@ async def playid(ctx, name, id):
             async with ctx.typing():
                 voice_channel.play(discord.FFmpegPCMAudio(source='./jirka/' + id + '.mp3'))
                 await ctx.send('Jirka ID: {}'.format(id))
+    if name == 'jolanda':
+        if int(id) > 13 or int(id) == 0:
+            await ctx.send("ID out of range")
+        else:
+            async with ctx.typing():
+                voice_channel.play(discord.FFmpegPCMAudio(source='./jolanda/' + id + '.wav'))
+                await ctx.send('Jolanda ID: {}'.format(id))
+
 # ORIGINAL
 # @bot.command(name="playid", help="Plays sound with given ID")
 # async def playid(ctx, id):
